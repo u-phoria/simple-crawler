@@ -33,6 +33,13 @@ public class SimpleHtmlLinkExtractorTest {
     }
 
     @Test
+    public void linkInBrokenHtml() throws Exception {
+        String doc = "<html><a href=hello#anch'</tml>";
+        Set<URL> res = simpleHtmlLinkExtractor.extractLinks(doc, new URL("http://moo.com"));
+        assertThat(res.iterator().next().toString(), equalTo("http://moo.com/hello"));
+    }
+
+    @Test
     public void excludeAnchor() throws Exception {
         String doc = "<html><a href='hello#anch'/></html>";
         Set<URL> res = simpleHtmlLinkExtractor.extractLinks(doc, new URL("http://moo.com"));
