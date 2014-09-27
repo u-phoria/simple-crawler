@@ -12,6 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 // Improvements:
 // - capture richer information per link - content type, title etc
 // - better content type handling, right now we just look for html in it
+// - n retries for failed requests
 // - more efficient response processing, currently we GET full content for
 //   along with checking content type, we chould use HEAD + only retrieve
 //   content if we can extract links
@@ -48,13 +49,13 @@ public class SingleDomainCrawler {
 
             LOG.debug("Crawl from {}", nextUrl);
             inProgress.incrementAndGet();
+            visited.add(nextUrl);
             fetcher.fetch(
                 nextUrl,
                 fetchResult -> {
                     try {
                         if (fetchResult == null)
                             return;
-                        visited.add(fetchResult.getUrl());
                         if (!isWebPage(fetchResult.getContentType()))
                             return;
                         result.putIfAbsent(nextUrl, Collections.synchronizedSet(new HashSet<>()));
@@ -66,7 +67,7 @@ public class SingleDomainCrawler {
                             }
                         }
                     } catch (Exception e) {
-                        LOG.error("Error processing content for {}: {}", nextUrl, e);
+                        LOG.error("Error processing content for {}: {}", nextUrl, e.getMessage());
                     } finally {
                         inProgress.decrementAndGet();
                     }
