@@ -1,4 +1,4 @@
-package simplecrawler.parser;
+package simplecrawler.linkextractor;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -9,7 +9,6 @@ import simplecrawler.HtmlLinkExtractor;
 import java.net.URI;
 import java.net.URL;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 // Improvements:

@@ -3,7 +3,7 @@ package simplecrawler.cli;
 import simplecrawler.HtmlLinkExtractor;
 import simplecrawler.SingleDomainCrawler;
 import simplecrawler.fetcher.AsyncFetcher;
-import simplecrawler.parser.SimpleHtmlLinkExtractor;
+import simplecrawler.linkextractor.SimpleHtmlLinkExtractor;
 
 import java.net.URL;
 import java.util.Map;

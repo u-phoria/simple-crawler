@@ -1,4 +1,4 @@
-package simplecrawler.parser;
+package simplecrawler.linkextractor;
 
 import org.junit.Test;
 
