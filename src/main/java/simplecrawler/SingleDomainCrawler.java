@@ -10,12 +10,18 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 // Improvements:
-// - richer information - content type, title etc
-// - maps in memory - consider async
-// - we depend on the thread pool of whatever implements Fetcher
-// - better content type handling
+// - capture richer information per link - content type, title etc
+// - better content type handling, right now we just look for html in it
+// - more efficient response processing, currently we GET full content for
+//   along with checking content type, we chould use HEAD + only retrieve
+//   content if we can extract links
+// - sitemap built up behind a blocking call + in memory before returning
+//   - fine for now but only scales so far, could think about async operation,
+//   callbacks, ultimately parallelising + extracting state for sharing etc//
+// - we currently depend on the thread pool of whatever implements Fetcher for
+//   callback processing, not immediately oobvious, own thred pool would b
+//   more so + allow better tuning
 // - pluggable / extensible strategies for following links etc
-// - return a Future from run()
 // ...
 public class SingleDomainCrawler {
     private static final Logger LOG = LoggerFactory.getLogger(SingleDomainCrawler.class);

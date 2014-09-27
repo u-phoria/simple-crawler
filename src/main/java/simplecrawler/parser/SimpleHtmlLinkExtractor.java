@@ -22,7 +22,7 @@ import java.util.Set;
 // - streaming - currently we require full body html, a streaming parser would reduce
 //   memory usage + possibly overall latency throughput by emitting early at expense of
 //   complexity and possibly accuracy (no dom context etc)
-// - support multiple whitelist / blacklist domains
+// - support whitelist / blacklist domains
 // - query strings - think about a bit more - right now we just throw them away
 // - ...
 public class SimpleHtmlLinkExtractor implements HtmlLinkExtractor {
