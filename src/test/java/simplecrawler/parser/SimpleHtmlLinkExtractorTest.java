@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.net.URL;
 import java.util.Set;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
@@ -37,6 +38,20 @@ public class SimpleHtmlLinkExtractorTest {
         String doc = "<html><a href='hello#anch'/></html>";
         Set<URL> res = simpleHtmlLinkExtractor.extractLinks(doc, new URL("http://moo.com"));
         assertThat(res.iterator().next().toString(), equalTo("http://moo.com/hello"));
+    }
+
+    @Test
+    public void unexpectedProtocol() throws Exception {
+        String doc = "<html><a href='tel:07777111222'/></html>";
+        Set<URL> res = simpleHtmlLinkExtractor.extractLinks(doc, new URL("http://moo.com"));
+        assertTrue(res.isEmpty());
+    }
+
+    @Test
+    public void spaceInUrl() throws Exception {
+        String doc = "<html><a href='http://moo.com/with space'/></html>";
+        Set<URL> res = simpleHtmlLinkExtractor.extractLinks(doc, new URL("http://moo.com"));
+        assertTrue(res.isEmpty());
     }
 
     @Test

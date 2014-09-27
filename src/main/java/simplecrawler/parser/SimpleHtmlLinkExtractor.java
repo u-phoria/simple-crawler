@@ -52,7 +52,7 @@ public class SimpleHtmlLinkExtractor implements HtmlLinkExtractor {
             LOG.debug("Found URL {}", url);
             result.add(url);;
         } catch (Exception e) {
-            LOG.error(String.format("Failed to extract URL snippet %s", urlSnippet), e);
+            LOG.info("Invalid URL snippet {} : {}", urlSnippet, e.getMessage());
         }
     }
 
