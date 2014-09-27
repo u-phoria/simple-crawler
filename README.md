@@ -1,4 +1,4 @@
-# Simple Single Domain crawler
+# Simple Single Domain Crawler
 
 Given a URL for the root of a domain (e.g. landing page for a website),
 crawls that domain and builds up a sitemap. 
