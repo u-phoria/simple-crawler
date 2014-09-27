@@ -20,12 +20,13 @@ import java.util.function.Consumer;
 
 // Improvements:
 // - configurable timeouts
-// - do head
-// - limit number of concurrent connections so we don't look like a DOS attack
+// - support HEAD operations + content type filtering per improvement note in SingleDomainCrawler
+// - limit number of concurrent connections so we don't look like a DOS attack or get throttled
 // ...
 public class AsyncFetcher implements Fetcher, Closeable {
     private static final Logger LOG = LoggerFactory.getLogger(AsyncFetcher.class);
     public static final int MAX_CONCURRENT = 20;
+    public static final int CONNECTION_TIMEOUT = 10000;
     private CloseableHttpAsyncClient httpclient;
 
     public AsyncFetcher() {
@@ -63,7 +64,7 @@ public class AsyncFetcher implements Fetcher, Closeable {
     private void initHttpClient() {
         try {
             RequestConfig requestConfig = RequestConfig.custom()
-                    .setConnectTimeout(10000).setSocketTimeout(10000).build();
+                    .setConnectTimeout(CONNECTION_TIMEOUT).setSocketTimeout(CONNECTION_TIMEOUT).build();
             PoolingNHttpClientConnectionManager poolingConnManager = new PoolingNHttpClientConnectionManager(new DefaultConnectingIOReactor());
             poolingConnManager.setMaxTotal(MAX_CONCURRENT);
             poolingConnManager.setDefaultMaxPerRoute(MAX_CONCURRENT);
