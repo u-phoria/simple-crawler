@@ -1,4 +1,4 @@
-package simplecrawler;
+package simplecrawler.cli;
 
 import java.io.PrintStream;
 import java.net.URL;

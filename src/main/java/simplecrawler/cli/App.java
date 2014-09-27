@@ -1,5 +1,8 @@
-package simplecrawler;
+package simplecrawler.cli;
 
+import simplecrawler.HtmlLinkExtractor;
+import simplecrawler.SingleDomainCrawler;
+import simplecrawler.SitemapPrinter;
 import simplecrawler.fetcher.AsyncFetcher;
 import simplecrawler.parser.SimpleHtmlLinkExtractor;
 
@@ -7,6 +10,7 @@ import java.net.URL;
 import java.util.Map;
 import java.util.Set;
 
+// Improvements
 public class App {
     public void run(String rootUrl) throws Exception {
         HtmlLinkExtractor linkExtractor = new SimpleHtmlLinkExtractor();

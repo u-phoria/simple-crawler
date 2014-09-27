@@ -1,13 +1,18 @@
-package simplecrawler;
+package simplecrawler.cli;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import org.junit.Rule;
 import org.junit.Test;
+import simplecrawler.cli.App;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
 
-public class IntegrationTest {
+// Improvements:
+// - test error scenarios (eg metwork error, incorrect content type, empty response)
+// - auto-discover free port for dummy web server
+// - ...
+public class AppIntegrationTest {
     public static final String TEXT_HTML = "text/html";
     private static final String TEXT_PLAIN = "text/plain";
     @Rule
@@ -31,8 +36,11 @@ public class IntegrationTest {
     }
 
     private void stubResponse(String resource, String contentType, String content) {
-        stubFor(get(urlEqualTo(resource)).willReturn(aResponse()
-                .withStatus(200).withHeader("Content-Type", contentType).withBody(content)));
+        stubFor(get(urlEqualTo(resource))
+                .willReturn(aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", contentType)
+                        .withBody(content)));
     }
 
 }
