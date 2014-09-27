@@ -9,10 +9,6 @@ import java.net.URL;
 import java.util.Map;
 import java.util.Set;
 
-// Improvements:
-// - helpful message re usage / args
-// - validate args
-//
 public class App {
 
     public void run(String rootUrl) throws Exception {
@@ -27,6 +23,11 @@ public class App {
     }
 
     public static void main(String[] argv) throws Exception {
+        if (argv.length != 1) {
+            System.err.println("Usage: java -jar <jar name> <root url>");
+            System.exit(1);
+        }
+
         App app = new App();
         app.run(argv[0]);
     }
