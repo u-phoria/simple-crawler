@@ -1,4 +1,7 @@
-# A simple single domain crawler
+# Simple Single Domain crawler
+
+Given a URL for the root of a domain (e.g. landing page for a website),
+crawls that domain and builds up a sitemap. 
 
 ## Prereqs
 - Java 8
