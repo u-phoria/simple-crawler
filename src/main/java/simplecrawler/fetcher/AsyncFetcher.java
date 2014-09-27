@@ -73,7 +73,7 @@ public class AsyncFetcher implements Fetcher, Closeable {
                     .setDefaultRequestConfig(requestConfig).build();
             httpclient.start();
         } catch (Exception e) {
-            LOG.error("Error initialising http client", e);
+            throw new RuntimeException("Error initialising http client", e);
         }
     }
 
